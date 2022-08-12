@@ -21,6 +21,7 @@ export const exampleRouter = createRouter()
   })
   .query("testKanta", {
     async resolve({ ctx, input }) {
+      
       return await ctx.prisma.user.findFirst(input);
     }
   });

@@ -6,6 +6,7 @@ import superjson from "superjson";
 import { SessionProvider } from "next-auth/react";
 import "../styles/globals.css";
 import { MantineProvider } from "@mantine/core";
+import { Layout } from "../components/Layout";
 
 const MyApp: AppType = ({
   Component,
@@ -21,7 +22,9 @@ const MyApp: AppType = ({
           colorScheme: "light",
         }}
       >
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </MantineProvider>
     </SessionProvider>
   );
