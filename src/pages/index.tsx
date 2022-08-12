@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
+import Link from "next/link";
 import { trpc } from "../utils/trpc";
 
 type TechnologyCardProps = {
@@ -16,7 +17,7 @@ const Home: NextPage = () => {
     return <p>Signed in as {session?.user?.email}</p>
   }
 
-  return <a href="/api/auth/signin">Sign in</a>
+  return <Link href="/api/auth/signin">Sign in</Link>
 };
 
 
