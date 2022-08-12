@@ -11,14 +11,13 @@ type TechnologyCardProps = {
 };
 
 const Home: NextPage = () => {
-  const { data: session, status } = useSession()
+  const { data: session, status } = useSession();
 
-  if (status === "authenticated") {
-    return <p>Signed in as {session?.user?.email}</p>
-  }
-
-  return <Link href="/api/auth/signin">Sign in</Link>
+  return (
+    <>
+      <Link href="/api/auth/signin">{session?.user?.email ? "S" : "test"}</Link>
+    </>
+  );
 };
-
 
 export default Home;
