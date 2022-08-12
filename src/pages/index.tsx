@@ -2,6 +2,8 @@ import {
   AppShell,
   Aside,
   Burger,
+  Button,
+  Card,
   Footer,
   Header,
   MediaQuery,
@@ -18,7 +20,9 @@ const Home: NextPage = () => {
   const { data: session, status } = useSession();
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+  const { data } = trpc.useQuery(["example.testKanta"]);
 
+  console.log(data);
   return (
     <AppShell
       styles={{
@@ -73,7 +77,15 @@ const Home: NextPage = () => {
         </Header>
       }
     >
-      <Text>Resize app to see responsive navbar in action</Text>
+      <Card>
+        <Text>
+          {session?.user ? (
+            `Logged in: ${session.user.email}`
+          ) : (
+            <Button>Log in</Button>
+          )}
+        </Text>
+      </Card>
     </AppShell>
   );
 };
