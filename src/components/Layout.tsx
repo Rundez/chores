@@ -9,6 +9,7 @@ import {
   Header,
   Burger,
 } from "@mantine/core";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 type Props = {
@@ -18,6 +19,7 @@ type Props = {
 export const Layout = (props: Props) => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+  const { data: session, status } = useSession();
 
   return (
     <AppShell
@@ -67,8 +69,10 @@ export const Layout = (props: Props) => {
                 mr="xl"
               />
             </MediaQuery>
-
-            <Text>Application header</Text>
+            <div className="flex flex-1 ">
+              <Text>Application header</Text>
+            </div>
+            <img className="rounded-full" src={session?.user?.image ?? ""} />
           </div>
         </Header>
       }

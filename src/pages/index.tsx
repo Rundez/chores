@@ -21,8 +21,11 @@ import { trpc } from "../utils/trpc";
 const Home: NextPage = () => {
   const [group, setGroup] = useState("");
   const { data: session, status } = useSession();
-  const { data } = trpc.useQuery(["example.testKanta"]);
+  const { data } = trpc.useQuery(["example.getGroups"]);
+  const { data: users } = trpc.useQuery(["example.getUsers"]);
 
+  console.log(data, "groups");
+  console.log(users, "users");
   return (
     <Card>
       <Text>

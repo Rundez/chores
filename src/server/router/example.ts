@@ -14,14 +14,14 @@ export const exampleRouter = createRouter()
       };
     },
   })
-  .query("getAll", {
+  .query("getUsers", {
     async resolve({ ctx }) {
-      return await ctx.prisma.example.findMany();
+      return await ctx.prisma.user.findMany();
     },
   })
-  .query("testKanta", {
+  .query("getGroups", {
     async resolve({ ctx, input }) {
       
-      return await ctx.prisma.user.findFirst(input);
+      return await ctx.prisma.group.findMany({include: {users: true}});
     }
   });
