@@ -5,7 +5,9 @@ import {
   Button,
   Card,
   Footer,
+  Group,
   Header,
+  Input,
   MediaQuery,
   Navbar,
   Text,
@@ -13,10 +15,11 @@ import {
 } from "@mantine/core";
 import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { BaseSyntheticEvent, SyntheticEvent, useState } from "react";
 import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
+  const [group, setGroup] = useState("");
   const { data: session, status } = useSession();
   const { data } = trpc.useQuery(["example.testKanta"]);
 
@@ -29,6 +32,13 @@ const Home: NextPage = () => {
           <Button>Log in</Button>
         )}
       </Text>
+      <Group>
+        <Input
+          value={group}
+          onChange={(e: BaseSyntheticEvent) => setGroup(e.target.value)}
+        />
+        <Button variant="default">Join/Create group</Button>
+      </Group>
     </Card>
   );
 };
