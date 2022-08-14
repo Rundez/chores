@@ -21,8 +21,8 @@ import { trpc } from "../utils/trpc";
 const Home: NextPage = () => {
   const [group, setGroup] = useState("");
   const { data: session, status } = useSession();
-  const { data } = trpc.useQuery(["example.getGroups"]);
-  const { data: users } = trpc.useQuery(["example.getUsers"]);
+  const { data } = trpc.useQuery(["public.getGroups"]);
+  const { data: users } = trpc.useQuery(["protected.getUsers"]);
 
   console.log(data, "groups");
   console.log(users, "users");
