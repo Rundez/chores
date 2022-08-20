@@ -22,10 +22,8 @@ const Home: NextPage = () => {
   const [group, setGroup] = useState("");
   const { data: session, status } = useSession();
   const { data } = trpc.useQuery(["public.getGroups"]);
-  const { data: users } = trpc.useQuery(["protected.getUsers"]);
+  const { data: test, isLoading } = trpc.useQuery(["protected.getUsers"]);
 
-  console.log(data, "groups");
-  console.log(users, "users");
   return (
     <Card>
       <Text>
