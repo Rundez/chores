@@ -14,25 +14,21 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import type { NextPage } from "next";
-import { useSession } from "next-auth/react";
-import { BaseSyntheticEvent, SyntheticEvent, useState } from "react";
+import { useSession, signIn } from "next-auth/react";
+import { BaseSyntheticEvent, useEffect, useState } from "react";
 import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
   const [group, setGroup] = useState("");
   const { data: session, status } = useSession();
   const { data } = trpc.useQuery(["public.getGroups"]);
-  const { data: test, isLoading } = trpc.useQuery(["protected.getUsers"]);
+  const { data: test } = trpc.useQuery(["protected.getUsers"]);
+  const { data: testData, isLoading } = trpc.useQuery(["protected.helloKanta"]);
 
+  console.log(testData);
   return (
-    <Card>
-      <Text>
-        {session?.user ? (
-          `Logged in: ${session.user.email}`
-        ) : (
-          <Button>Log in</Button>
-        )}
-      </Text>
+    <Card className="p-4">
+      <Text>{session?.user && `Logged in: ${session.user.email}`}</Text>
       <Group>
         <Input
           value={group}

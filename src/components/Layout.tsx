@@ -8,8 +8,9 @@ import {
   Footer,
   Header,
   Burger,
+  Button,
 } from "@mantine/core";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useState } from "react";
 
 type Props = {
@@ -20,6 +21,8 @@ export const Layout = (props: Props) => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   const { data: session, status } = useSession();
+
+  console.log(session);
 
   return (
     <AppShell
@@ -70,9 +73,15 @@ export const Layout = (props: Props) => {
               />
             </MediaQuery>
             <div className="flex flex-1 ">
-              <Text>Application header</Text>
+              <Text className="text-3xl">Sameieportalen</Text>
             </div>
-            <img className="rounded-full" src={session?.user?.image ?? ""} />
+            {session?.user ? (
+              <img className="rounded-full" src={session?.user?.image ?? ""} />
+            ) : (
+              <Button variant="default" onClick={() => signIn()}>
+                Log in
+              </Button>
+            )}
           </div>
         </Header>
       }

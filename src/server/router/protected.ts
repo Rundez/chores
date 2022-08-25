@@ -22,5 +22,10 @@ export const protectedRouter = createProtectedRouter()
         
         return await ctx.prisma.group.findMany({include: {users: true}});
       }
-    });
+    }).query("helloKanta", {
+      async resolve({ ctx }) {
+        
+        return "Hello kanta"
+      }
+    })
   
