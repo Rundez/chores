@@ -1,4 +1,4 @@
-import { Alert, Button, Modal, Text, TextInput } from "@mantine/core";
+import { Alert, Button, Loader, Modal, Text, TextInput } from "@mantine/core";
 import { ChangeEvent, useEffect, useState } from "react";
 import { trpc } from "../utils/trpc";
 import { AlertCircle } from "tabler-icons-react";
@@ -9,7 +9,7 @@ type Props = {
   onClose: () => void;
 };
 export const AddGroupModal = (props: Props) => {
-  const { mutate, error, isSuccess } = trpc.useMutation([
+  const { mutate, error, isSuccess, isLoading } = trpc.useMutation([
     "protected.createGroup",
   ]);
   const [name, setName] = useState("");
@@ -47,6 +47,12 @@ export const AddGroupModal = (props: Props) => {
         <Button variant="outline" onClick={() => mutate({ description, name })}>
           Legg til
         </Button>
+
+        {isLoading && (
+          <div className="flex justify-center">
+            <Loader />{" "}
+          </div>
+        )}
         {error && (
           <Alert
             color="red"
