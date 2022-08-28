@@ -74,7 +74,11 @@ export const Layout = (props: Props) => {
               />
             </MediaQuery>
             <div className="flex flex-1 ">
-              <Text className="text-3xl">Sameieportalen</Text>
+              <Link href="/">
+                <button>
+                  <Text className="text-3xl">Sameieportalen</Text>
+                </button>
+              </Link>
             </div>
             {session?.user ? (
               <img className="rounded-full" src={session?.user?.image ?? ""} />
