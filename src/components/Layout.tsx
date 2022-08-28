@@ -55,9 +55,11 @@ export const Layout = (props: Props) => {
         </MediaQuery>
       }
       footer={
-        <Footer height={60} p="md">
-          Application footer
-        </Footer>
+        <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+          <Footer height={60} p="md">
+            Application footer
+          </Footer>
+        </MediaQuery>
       }
       header={
         <Header height={70} p="md">
