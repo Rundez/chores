@@ -16,6 +16,7 @@ import {
 import type { NextPage } from "next";
 import { useSession, signIn } from "next-auth/react";
 import { BaseSyntheticEvent, useEffect, useState } from "react";
+import { InviteFriendsCard } from "../components/InviteFriendsCard";
 import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
@@ -23,20 +24,24 @@ const Home: NextPage = () => {
   const { data: session, status } = useSession();
   const { data } = trpc.useQuery(["public.getGroups"]);
   const { data: test } = trpc.useQuery(["protected.getUsers"]);
-  const { data: testData, isLoading } = trpc.useQuery(["protected.helloKanta"]);
 
-  console.log(testData);
   return (
-    <Card className="p-4">
-      <Text>{session?.user && `Logged in: ${session.user.email}`}</Text>
-      <Group>
-        <Input
-          value={group}
-          onChange={(e: BaseSyntheticEvent) => setGroup(e.target.value)}
-        />
-        <Button variant="default">Join/Create group</Button>
-      </Group>
-    </Card>
+    <div className="flex flex-col gap-4">
+      <Card className="p-4">
+        <Text>{session?.user && `Logged in: ${session.user.email}`}</Text>
+        <Group>
+          <Input
+            value={group}
+            onChange={(e: BaseSyntheticEvent) => setGroup(e.target.value)}
+          />
+          <Button variant="default">Join/Create group</Button>
+        </Group>
+      </Card>
+
+      <div className="flex flex-col gap-4">
+        <InviteFriendsCard />
+      </div>
+    </div>
   );
 };
 
