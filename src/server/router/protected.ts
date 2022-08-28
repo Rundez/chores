@@ -25,8 +25,8 @@ export const protectedRouter = createProtectedRouter()
     })
     .mutation("createGroup", {
       input: z.object({
-        name: z.string().max(5),
-        description: z.string()
+        name: z.string().max(30),
+        description: z.string().max(50)
       }),
       async resolve({ ctx, input }) {
         await ctx.prisma.group.create({
