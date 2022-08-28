@@ -11,6 +11,7 @@ import {
   Button,
 } from "@mantine/core";
 import { signIn, useSession } from "next-auth/react";
+import Link from "next/link";
 import { useState } from "react";
 
 type Props = {
@@ -21,8 +22,6 @@ export const Layout = (props: Props) => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   const { data: session, status } = useSession();
-
-  console.log(session);
 
   return (
     <AppShell
@@ -41,9 +40,11 @@ export const Layout = (props: Props) => {
           p="md"
           hiddenBreakpoint="sm"
           hidden={!opened}
-          width={{ sm: 200, lg: 300 }}
+          width={{ sm: 150, lg: 200 }}
         >
-          <Text>Application navbar</Text>
+          <div>
+            <Link href="/groups">Grupper</Link>
+          </div>
         </Navbar>
       }
       aside={
