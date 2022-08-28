@@ -7,7 +7,6 @@ function Groups() {
   const { data } = trpc.useQuery(["protected.getGroups"]);
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log(data);
   return (
     <div className="flex flex-col h-full gap-4">
       <Text size={"lg"} weight="bold" className="text-2xl">
