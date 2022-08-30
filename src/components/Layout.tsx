@@ -45,7 +45,7 @@ export const Layout = (props: Props) => {
           hidden={!opened}
           width={{ sm: 150, lg: 200 }}
         >
-          <div className="flex justify-center flex-col">
+          <div className="flex flex-col h-full">
             <Link href="/">
               <NavLink
                 label="Hjem"
@@ -53,7 +53,6 @@ export const Layout = (props: Props) => {
                 active={asPath === "/"}
               />
             </Link>
-
             <Link href="/groups">
               <NavLink
                 label="Mine grupper"
@@ -66,6 +65,7 @@ export const Layout = (props: Props) => {
                 label="Innstillinger"
                 icon={<Settings size={20} strokeWidth={1.5} color="black" />}
                 active={asPath === "/settings"}
+                className="mt-auto"
               />
             </Link>
           </div>
