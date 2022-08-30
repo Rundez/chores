@@ -9,10 +9,13 @@ import {
   Header,
   Burger,
   Button,
+  NavLink,
 } from "@mantine/core";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import { AlertCircle, Heart, Home2, Settings } from "tabler-icons-react";
 
 type Props = {
   children: React.ReactNode;
@@ -22,6 +25,7 @@ export const Layout = (props: Props) => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   const { data: session, status } = useSession();
+  const { asPath } = useRouter();
 
   return (
     <AppShell
@@ -37,13 +41,33 @@ export const Layout = (props: Props) => {
       asideOffsetBreakpoint="sm"
       navbar={
         <Navbar
-          p="md"
           hiddenBreakpoint="sm"
           hidden={!opened}
           width={{ sm: 150, lg: 200 }}
         >
-          <div>
-            <Link href="/groups">Grupper</Link>
+          <div className="flex justify-center flex-col">
+            <Link href="/">
+              <NavLink
+                label="Hjem"
+                icon={<Home2 size={20} color="black" strokeWidth={1.5} />}
+                active={asPath === "/"}
+              />
+            </Link>
+
+            <Link href="/groups">
+              <NavLink
+                label="Mine grupper"
+                icon={<Heart size={20} strokeWidth={1.5} color="black" />}
+                active={asPath === "/groups"}
+              />
+            </Link>
+            <Link href="/settings">
+              <NavLink
+                label="Innstillinger"
+                icon={<Settings size={20} strokeWidth={1.5} color="black" />}
+                active={asPath === "/settings"}
+              />
+            </Link>
           </div>
         </Navbar>
       }
