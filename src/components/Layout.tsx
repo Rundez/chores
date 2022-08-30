@@ -10,12 +10,14 @@ import {
   Burger,
   Button,
   NavLink,
+  Switch,
 } from "@mantine/core";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { AlertCircle, Heart, Home2, Settings } from "tabler-icons-react";
+import { AlertCircle, Eye, Heart, Home2, Settings } from "tabler-icons-react";
+import { useThemeStore } from "../stores/themeStore";
 
 type Props = {
   children: React.ReactNode;
@@ -24,8 +26,9 @@ type Props = {
 export const Layout = (props: Props) => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const { asPath } = useRouter();
+  const { toggleTheme, isDark } = useThemeStore();
 
   return (
     <AppShell
@@ -49,21 +52,22 @@ export const Layout = (props: Props) => {
             <Link href="/">
               <NavLink
                 label="Hjem"
-                icon={<Home2 size={20} color="black" strokeWidth={1.5} />}
+                icon={<Home2 size={20} strokeWidth={1.5} />}
                 active={asPath === "/"}
               />
             </Link>
             <Link href="/groups">
               <NavLink
                 label="Mine grupper"
-                icon={<Heart size={20} strokeWidth={1.5} color="black" />}
+                icon={<Heart size={20} strokeWidth={1.5} />}
                 active={asPath === "/groups"}
               />
             </Link>
+
             <Link href="/settings">
               <NavLink
                 label="Innstillinger"
-                icon={<Settings size={20} strokeWidth={1.5} color="black" />}
+                icon={<Settings size={20} strokeWidth={1.5} />}
                 active={asPath === "/settings"}
                 className="mt-auto"
               />
@@ -105,6 +109,11 @@ export const Layout = (props: Props) => {
                   <Text className="text-3xl">Sameieportalen</Text>
                 </button>
               </Link>
+            </div>
+
+            <div className="px-4 flex flex-col items-center">
+              <Eye size={20} strokeWidth={1.5} />
+              <Switch checked={isDark} onChange={(e) => toggleTheme()} />
             </div>
             {session?.user ? (
               <img className="rounded-full" src={session?.user?.image ?? ""} />

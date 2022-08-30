@@ -7,11 +7,14 @@ import { SessionProvider } from "next-auth/react";
 import "../styles/globals.css";
 import { MantineProvider } from "@mantine/core";
 import { Layout } from "../components/Layout";
+import { useThemeStore } from "../stores/themeStore";
 
 const MyApp: AppType = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
+  const { isDark } = useThemeStore();
+
   return (
     <SessionProvider session={session}>
       <MantineProvider
@@ -19,7 +22,7 @@ const MyApp: AppType = ({
         withNormalizeCSS
         theme={{
           /** Put your mantine theme override here */
-          colorScheme: "light",
+          colorScheme: isDark ? "dark" : "light",
         }}
       >
         <Layout>
