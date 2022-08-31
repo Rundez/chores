@@ -17,6 +17,7 @@ function Groups() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {data?.map((grp) => (
             <Card
+              key={grp.id}
               shadow={"md"}
               className="transition duration-500 ease-in-out hover:scale-105  "
             >
