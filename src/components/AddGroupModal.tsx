@@ -9,7 +9,7 @@ type Props = {
   onClose: () => void;
 };
 export const AddGroupModal = (props: Props) => {
-  const { mutate, error, isSuccess, isLoading } = trpc.useMutation([
+  const { mutate, error, isSuccess, isLoading, data } = trpc.useMutation([
     "protected.createGroup",
   ]);
   const [name, setName] = useState("");
